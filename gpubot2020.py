@@ -10,9 +10,9 @@ import bs4
 # url = 'https://www.bestbuy.com/site/nvidia-geforce-rtx-3070-8gb-gddr6-pci-express-4-0-graphics-card-dark-platinum-and-black/6429442.p?skuId=6429442'
 
 # add to cart test
-# url = 'https://www.bestbuy.com/site/amd-ryzen-7-3700x-3rd-generation-8-core-16-thread-3-6-ghz-4-4-ghz-max-boost-socket-am4-unlocked-desktop-processor/6356277.p?skuId=6356277'
+url = 'https://www.bestbuy.com/site/amd-ryzen-7-3700x-3rd-generation-8-core-16-thread-3-6-ghz-4-4-ghz-max-boost-socket-am4-unlocked-desktop-processor/6356277.p?skuId=6356277'
 # sold out test
-url = 'https://www.bestbuy.com/site/msi-aegis-rs-gaming-desktop-intel-core-i7-10700kf-16gb-memory-nvidia-geforce-rtx-3080-1tb-ssd-black-black/6439310.p?skuId=6439310'
+# url = 'https://www.bestbuy.com/site/msi-aegis-rs-gaming-desktop-intel-core-i7-10700kf-16gb-memory-nvidia-geforce-rtx-3080-1tb-ssd-black-black/6439310.p?skuId=6439310'
 
 # creates a web driver with my personal google chrome options and returns it
 def make_driver():
@@ -40,17 +40,20 @@ def find_card(driver):
             sold_out = markup.find('button', {'class': 'btn btn-disabled btn-lg btn-block add-to-cart-button'})
             if add_to_cart:
                 print(f'found button:', add_to_cart.get_text())
+                add_cart(driver)
             elif sold_out:
                 print(f'found button:', sold_out.get_text())
-                time.sleep(5)
-                driver.refresh()
 
         # if no card was found, wait 5 seconds, refresh page, try again.
         finally:
-            time.sleep(5)
+            time.sleep(3)
             driver.refresh()
 
 
+def add_cart(driver):
+    button = '.add-to-cart-button'
+    driver.find_element_by_css_selector(button).click()
+    print('clicked button, check cart')
 
 if __name__ == '__main__':
     driver = make_driver()
