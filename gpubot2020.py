@@ -1,4 +1,7 @@
-# this file is a bot that buys a gpu
+# McKay Mower, mmower777@gmail.com
+# 12/18/2020
+# This python script represents a bot that can buy the product given a certain url
+
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, TimeoutException, ElementNotInteractableException
 import time
