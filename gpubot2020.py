@@ -1,6 +1,6 @@
 # McKay Mower, mmower777@gmail.com
 # 12/18/2020
-# This python script represents a bot that can buy the product given a certain url
+# This python script represents a bot that can buy the product given a certain url from bestbuy
 
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, TimeoutException, ElementNotInteractableException
@@ -34,9 +34,10 @@ def find_card(driver):
     # open url in chrome
     driver.get(url)
 
+    # gather html from page
+    markup = bs4.BeautifulSoup(driver.page_source, 'html.parser')
+
     while True:
-        # gather html from page
-        markup = bs4.BeautifulSoup(driver.page_source, 'html.parser')
         try:
             # try to get either a sold out or atc button
             add_to_cart = markup.find('button', {'class': 'btn btn-primary btn-lg btn-block btn-leading-ficon '
@@ -126,6 +127,7 @@ def place_order(driver):
             pass
 
     print('order placed!')
+
 
 if __name__ == '__main__':
     driver = make_driver()
