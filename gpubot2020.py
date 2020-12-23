@@ -37,6 +37,7 @@ def find_card(driver):
     # gather html from page
     markup = bs4.BeautifulSoup(driver.page_source, 'html.parser')
 
+
     while True:
         try:
             # try to get either a sold out or atc button

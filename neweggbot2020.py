@@ -48,6 +48,7 @@ def generate_list(driver):
         print(f'sold out: ', {so.text})
 
 
+
 if __name__ == '__main__':
     driver = make_driver()
     generate_list(driver)
